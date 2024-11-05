@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos JavaScript - Tutorial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .evento-demo {
+            border: 2px solid #007bff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .output-box {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            min-height: 40px;
+        }
+        .draggable {
+            width: 100px;
+            height: 100px;
+            background-color: #28a745;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+        }
+        .drop-zone {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #dc3545;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Eventos JavaScript</span>
+</nav>
+
+<div class="container mt-4">
+    <!-- onClick -->
+    <div class="evento-demo">
+        <h3>onClick</h3>
+        <button class="btn btn-primary" onclick="mostrarMensaje('click', 'outputClick')">Haz clic aquí</button>
+        <div id="outputClick" class="output-box"></div>
+    </div>
+
+    <!-- onDblClick -->
+    <div class="evento-demo">
+        <h3>onDblClick</h3>
+        <button class="btn btn-secondary" ondblclick="mostrarMensaje('doble click', 'outputDblClick')">Haz doble clic aquí</button>
+        <div id="outputDblClick" class="output-box"></div>
+    </div>
+
+    <!-- onMouseOver y onMouseOut -->
+    <div class="evento-demo">
+        <h3>onMouseOver y onMouseOut</h3>
+        <div class="p-3 bg-info text-white" 
+             onmouseover="mostrarMensaje('mouse over', 'outputMouse')"
+             onmouseout="mostrarMensaje('mouse out', 'outputMouse')">
+            Mueve el mouse sobre este elemento
+        </div>
+        <div id="outputMouse" class="output-box"></div>
+    </div>
+
+    <!-- onKeyDown y onKeyUp -->
+    <div class="evento-demo">
+        <h3>onKeyDown y onKeyUp</h3>
+        <input type="text" class="form-control" 
+               onkeydown="mostrarMensaje('tecla presionada: ' + event.key, 'outputKey')"
+               onkeyup="mostrarMensaje('tecla liberada: ' + event.key, 'outputKey')"
+               placeholder="Escribe algo aquí">
+        <div id="outputKey" class="output-box"></div>
+    </div>
+
+    <!-- onSubmit -->
+    <div class="evento-demo">
+        <h3>onSubmit</h3>
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nombre" required>
+            </div>
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </form>
+        <div id="outputSubmit" class="output-box"></div>
+    </div>
+
+    <!-- onChange -->
+    <div class="evento-demo">
+        <h3>onChange</h3>
+        <select class="form-control" onchange="mostrarMensaje('selección cambiada a: ' + this.value, 'outputChange')">
+            <option value="">Selecciona una opción</option>
+            <option value="1">Opción 1</option>
+            <option value="2">Opción 2</option>
+            <option value="3">Opción 3</option>
+        </select>
+        <div id="outputChange" class="output-box"></div>
+    </div>
+
+    <!-- onLoad -->
+    <div class="evento-demo">
+        <h3>onLoad</h3>
+        <img src="https://via.placeholder.com/150" 
+             onload="mostrarMensaje('imagen cargada', 'outputLoad')"
+             alt="Imagen de ejemplo">
+        <div id="outputLoad" class="output-box"></div>
+    </div>
+
+    <!-- onScroll -->
+    <div class="evento-demo">
+        <h3>onScroll</h3>
+        <div style="height: 100px; overflow-y: scroll;" onscroll="mostrarMensaje('scrolling...', 'outputScroll')">
+            <p>Contenido para scroll...</p>
+            <p>Más contenido...</p>
+            <p>Aún más contenido...</p>
+            <p>Sigue bajando...</p>
+            <p>Casi al final...</p>
+            <p>Final del contenido.</p>
+        </div>
+        <div id="outputScroll" class="output-box"></div>
+    </div>
+
+    <!-- onFocus y onBlur -->
+    <div class="evento-demo">
+        <h3>onFocus y onBlur</h3>
+        <input type="text" class="form-control"
+               onfocus="mostrarMensaje('input en foco', 'outputFocusBlur')"
+               onblur="mostrarMensaje('input perdió el foco', 'outputFocusBlur')"
+               placeholder="Haz clic aquí">
+        <div id="outputFocusBlur" class="output-box"></div>
+    </div>
+
+    <!-- onResize -->
+    <div class="evento-demo">
+        <h3>onResize</h3>
+        <p>Redimensiona la ventana del navegador</p>
+        <div id="outputResize" class="output-box"></div>
+    </div>
+
+    <!-- onContextMenu -->
+    <div class="evento-demo">
+        <h3>onContextMenu</h3>
+        <div class="p-3 bg-warning" oncontextmenu="handleContextMenu(event)">
+            Haz clic derecho aquí
+        </div>
+        <div id="outputContext" class="output-box"></div>
+    </div>
+
+    <!-- onDrag -->
+    <div class="evento-demo">
+        <h3>onDrag</h3>
+        <div class="draggable" draggable="true" 
+             ondrag="mostrarMensaje('arrastrando...', 'outputDrag')"
+             ondragend="mostrarMensaje('arrastre finalizado', 'outputDrag')">
+            Arrástrame
+        </div>
+        <div class="drop-zone">Zona para soltar</div>
+        <div id="outputDrag" class="output-box"></div>
+    </div>
+</div>
+
+<script>
+// Función general para mostrar mensajes
+function mostrarMensaje(mensaje, outputId) {
+    const output = document.getElementById(outputId);
+    output.innerHTML = `<div class="alert alert-info">${mensaje}</div>`;
+    setTimeout(() => {
+        output.innerHTML = '';
+    }, 2000);
+}
+
+// Manejador para onSubmit
+function handleSubmit(event) {
+    event.preventDefault();
+    mostrarMensaje('formulario enviado', 'outputSubmit');
+}
+
+// Manejador para onContextMenu
+function handleContextMenu(event) {
+    event.preventDefault();
+    mostrarMensaje('menú contextual activado', 'outputContext');
+}
+
+// Listener para onResize
+window.onresize = function() {
+    mostrarMensaje(`ventana redimensionada a: ${window.innerWidth}x${window.innerHeight}`, 'outputResize');
+};
+
+// Contador para onLoad
+window.onload = function() {
+    mostrarMensaje('página cargada completamente', 'outputLoad');
+};
+
+// Configuración para Drag and Drop
+document.querySelectorAll('.draggable').forEach(draggable => {
+    draggable.addEventListener('dragstart', function(e) {
+        e.dataTransfer.setData('text/plain', '');
+        mostrarMensaje('inicio de arrastre', 'outputDrag');
+    });
+});
+
+document.querySelectorAll('.drop-zone').forEach(dropZone => {
+    dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+    });
+
+    dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        mostrarMensaje('elemento soltado', 'outputDrag');
+    });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

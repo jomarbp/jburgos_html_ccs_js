@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Operaciones Matemáticas</title>
+</head>
+<body>
+	<h2>Resultados de las operaciones:</h2>
+	<div id="resultados"></div>
+
+	<script>
+		// Declaración de variables
+		let numero1 = parseFloat(prompt("Ingrese el primer número:"));
+		let numero2 = parseFloat(prompt("Ingrese el segundo número:"));
+		let numero3 = parseFloat(prompt("Ingrese el tercer número:"));
+
+		// Realizar operaciones
+		let suma = numero1 + numero2 + numero3;
+		let resta = numero1 - numero2 - numero3;
+		let multiplicacion = numero1 * numero2 * numero3;
+		let division = numero1 / numero2 / numero3;
+
+		// Mostrar resultados
+		document.getElementById('resultados').innerHTML = `
+			<p>Suma: ${numero1} + ${numero2} + ${numero3} = ${suma}</p>
+			<p>Resta: ${numero1} - ${numero2} - ${numero3} = ${resta}</p>
+			<p>Multiplicación: ${numero1} × ${numero2} × ${numero3} = ${multiplicacion}</p>
+			<p>División: ${numero1} ÷ ${numero2} ÷ ${numero3} = ${division}</p>
+		`;
+	</script>
+</body>
+</html>

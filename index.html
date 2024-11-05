@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso HTML, CSS y JavaScript - Por Jomar</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Prism CSS para resaltado de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    
+    <style>
+        /* Estilos personalizados */
+        .sidebar {
+            position: fixed;
+            top: 56px;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .code-example {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .result-example {
+            border: 2px dashed #dee2e6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .hover-effect:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        /* Estilos para ejemplos JavaScript */
+        .js-demo {
+            padding: 20px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .output-console {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+
+        /* Estilos para las pestañas de código */
+        .code-tabs {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .code-tabs .nav-link {
+            border-radius: 0;
+        }
+
+        /* Estilos para ejercicios prácticos */
+        .exercise-card {
+            border: 2px solid #007bff;
+            margin: 15px 0;
+        }
+
+        .exercise-card .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Personalización de scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">
+        <i class="fas fa-code"></i> Curso Web - Jomar
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="#html"><i class="fab fa-html5"></i> HTML</a></li>
+            <li class="nav-item"><a class="nav-link" href="#css"><i class="fab fa-css3-alt"></i> CSS</a></li>
+            <li class="nav-item"><a class="nav-link" href="#javascript"><i class="fab fa-js"></i> JavaScript</a></li>
+            <li class="nav-item"><a class="nav-link" href="#ejercicios"><i class="fas fa-laptop-code"></i> Ejercicios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#proyectos"><i class="fas fa-project-diagram"></i> Proyectos</a></li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar...">
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Sidebar -->
+<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <!-- HTML Section -->
+            <li class="nav-item">
+                <a class="nav-link active" href="#html-intro">
+                    <i class="fab fa-html5"></i> HTML
+                </a>
+                <ul class="nav flex-column ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#html-basico">Conceptos Básicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#html-estructura">Estructura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#html-elementos">Elementos Comunes</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- CSS Section -->
+            <li class="nav-item">
+                <a class="nav-link" href="#css-intro">
+                    <i class="fab fa-css3-alt"></i> CSS
+                </a>
+                <ul class="nav flex-column ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#css-basico">Conceptos Básicos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#css-selectores">Selectores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#css-box-model">Box Model</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- JavaScript Section -->
+            <li class="nav-item">
+                <a class="nav-link" href="#js-intro">
+                    <i class="fab fa-js"></i> JavaScript
+                </a>
+                <ul class="nav flex-column ml-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-fundamentos">Fundamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-variables">Variables y Tipos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-operadores">Operadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-control">Estructuras de Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-funciones">Funciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-arrays">Arrays</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-objetos">Objetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-dom">DOM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#js-eventos">Eventos</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="eventos.html">Más Ejemplos</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <!-- Ejercicios Section -->
+            <li class="nav-item">
+                <a class="nav-link" href="#ejercicios">
+                    <i class="fas fa-laptop-code"></i> Ejercicios
+                </a>
+            </li>
+
+            <!-- Proyectos Section -->
+            <li class="nav-item">
+                <a class="nav-link" href="#proyectos">
+                    <i class="fas fa-project-diagram"></i> Proyectos
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- Contenido Principal -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <!-- Sección de Bienvenida -->
+    <section id="inicio" class="py-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenido al Curso Web</h1>
+            <p class="lead">Aprende HTML, CSS y JavaScript de manera práctica y efectiva.</p>
+            <hr class="my-4">
+            <p>Este curso está diseñado para que puedas aprender paso a paso y con ejemplos prácticos.</p>
+            <a class="btn btn-primary btn-lg" href="#html-intro" role="button">Comenzar</a>
+        </div>
+    </section>
+
+    <!-- Sección HTML -->
+    <section id="html-intro" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2><i class="fab fa-html5"></i> HTML - HyperText Markup Language</h2>
+            </div>
+            <div class="card-body">
+                <h3 id="html-basico">Conceptos Básicos</h3>
+                <p>HTML es el lenguaje estándar para crear páginas web. Define la estructura y el contenido de una página web.</p>
+
+                <div class="code-example">
+                    <h4>Estructura básica de un documento HTML:</h4>
+                    <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi primera página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Hola Mundo!&lt;/h1&gt;
+    &lt;p&gt;Este es mi primer párrafo.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </code></pre>
+                </div>
+
+                <h3 id="html-elementos" class="mt-4">Elementos Comunes</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Elemento</th>
+                                <th>Descripción</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>&lt;h1&gt; - &lt;h6&gt;</td>
+                                <td>Encabezados</td>
+                                <td><h1>H1</h1><h2>H2</h2></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;p&gt;</td>
+                                <td>Párrafo</td>
+                                <td><p>Texto de párrafo</p></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;a&gt;</td>
+                                <td>Enlaces</td>
+                                <td><a href="#">Enlace</a></td>
+                            </tr>
+                            <tr>
+                                <td>&lt;img&gt;</td>
+                                <td>Imágenes</td>
+                                <td><code>&lt;img src="imagen.jpg" alt="descripción"&gt;</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección CSS -->
+    <section id="css-intro" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h2><i class="fab fa-css3-alt"></i> CSS - Cascading Style Sheets</h2>
+            </div>
+            <div class="card-body">
+                <h3 id="css-basico">Conceptos Básicos</h3>
+                <p>CSS es el lenguaje utilizado para estilizar y dar formato a documentos HTML.</p>
+
+                <div class="code-example">
+                    <h4>Sintaxis básica CSS:</h4>
+                    <pre><code class="language-css">
+selector {
+    propiedad: valor;
+    otra-propiedad: otro-valor;
+}
+
+/* Ejemplo */
+.mi-clase {
+    color: blue;
+    font-size: 16px;
+    margin: 10px;
+}
+                    </code></pre>
+                </div>
+
+                <h3 id="css-selectores" class="mt-4">Selectores</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Selector</th>
+                                <th>Descripción</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>elemento</td>
+                                <td>Selecciona todos los elementos de ese tipo</td>
+                                <td><code>p { color: red; }</code></td>
+                            </tr>
+                            <tr>
+                                <td>.clase</td>
+                                <td>Selecciona elementos con esa clase</td>
+                                <td><code>.destacado { font-weight: bold; }</code></td>
+                            </tr>
+                            <tr>
+                                <td>#id</td>
+                                <td>Selecciona el elemento con ese ID</td>
+                                <td><code>#header { background: black; }</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="css-box-model" class="mt-4">Box Model</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://www.w3.org/TR/CSS2/images/box-model.png" alt="CSS Box Model" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">Content - El contenido del elemento</li>
+                            <li class="list-group-item">Padding - Espacio interno</li>
+                            <li class="list-group-item">Border - Borde del elemento</li>
+                            <li class="list-group-item">Margin - Espacio externo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección JavaScript -->
+    <section id="js-intro" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h2><i class="fab fa-js"></i> JavaScript</h2>
+            </div>
+            <div class="card-body">
+                <h3 id="js-fundamentos">Fundamentos</h3>
+                <p>JavaScript es un lenguaje de programación que permite crear contenido dinámico en páginas web.</p>
+
+                <div class="code-example">
+                    <h4>Variables y Tipos de Datos:</h4>
+                    <pre><code class="language-javascript">
+// Variables
+let nombre = "Juan";          // String
+let edad = 25;               // Number
+let esEstudiante = true;     // Boolean
+let notas = [8, 9, 7, 10];   // Array
+let persona = {              // Object
+    nombre: "Ana",
+    edad: 30
+};
+
+// Constantes
+const PI = 3.1416;
+                    </code></pre>
+                </div>
+
+                <div class="js-demo mt-4">
+                    <h4>Ejemplo Interactivo:</h4>
+                    <button onclick="mostrarAlerta()" class="btn btn-primary">Mostrar Alerta</button>
+                    <div id="resultado" class="output-console mt-2"></div>
+
+                    <script>
+                    function mostrarAlerta() {
+                        alert('¡Hola! Esto es JavaScript en acción');
+                        document.getElementById('resultado').innerHTML = 'Alerta mostrada exitosamente';
+                    }
+                    </script>
+                </div>
+
+                <h3 id="js-operadores" class="mt-4">Operadores</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Operador</th>
+                                <th>Descripción</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>+</td>
+                                <td>Suma</td>
+                                <td><code>let suma = 5 + 3; // 8</code></td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>Resta</td>
+                                <td><code>let resta = 5 - 3; // 2</code></td>
+                            </tr>
+                            <tr>
+                                <td>*</td>
+                                <td>Multiplicación</td>
+                                <td><code>let mult = 5 * 3; // 15</code></td>
+                            </tr>
+                            <tr>
+                                <td>/</td>
+                                <td>División</td>
+                                <td><code>let div = 6 / 2; // 3</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="js-control" class="mt-4">Estructuras de Control</h3>
+                <div class="code-example">
+                    <h4>If-Else:</h4>
+                    <pre><code class="language-javascript">
+let edad = 18;
+if (edad >= 18) {
+    console.log("Eres mayor de edad");
+} else {
+    console.log("Eres menor de edad");
+}
+
+// For Loop
+for (let i = 0; i < 5; i++) {
+    console.log("Iteración " + i);
+}
+
+// While Loop
+let contador = 0;
+while (contador < 3) {
+    console.log(contador);
+    contador++;
+}
+                    </code></pre>
+                </div>
+
+                <div class="exercise-card card mt-4">
+                    <div class="card-header">
+                        <h4>Ejercicio Práctico</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Crear un contador simple:</p>
+                        <div id="contador">0</div>
+                        <button onclick="incrementar()" class="btn btn-success">Incrementar</button>
+                        <button onclick="decrementar()" class="btn btn-danger">Decrementar</button>
+
+                        <script>
+                        let count = 0;
+                        function incrementar() {
+                            count++;
+                            document.getElementById('contador').innerHTML = count;
+                        }
+                        function decrementar() {
+                            count--;
+                            document.getElementById('contador').innerHTML = count;
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Más secciones de JavaScript -->
+<!-- Sección JavaScript - DOM -->
+    <section id="js-dom" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h2><i class="fas fa-code"></i> JavaScript - DOM (Document Object Model)</h2>
+            </div>
+            <div class="card-body">
+                <h3>Manipulación del DOM</h3>
+                <p>El DOM permite a JavaScript acceder y modificar los elementos HTML de una página.</p>
+
+                <div class="code-example">
+                    <h4>Selección de Elementos:</h4>
+                    <pre><code class="language-javascript">
+// Seleccionar por ID
+let elemento = document.getElementById('miId');
+
+// Seleccionar por clase
+let elementos = document.getElementsByClassName('miClase');
+
+// Seleccionar por etiqueta
+let parrafos = document.getElementsByTagName('p');
+
+// Selector moderno (devuelve el primer elemento que coincida)
+let elemento = document.querySelector('.miClase');
+
+// Selector moderno (devuelve todos los elementos que coincidan)
+let elementos = document.querySelectorAll('.miClase');
+                    </code></pre>
+                </div>
+
+                <div class="js-demo mt-4">
+                    <h4>Ejemplo Práctico - Modificar Contenido:</h4>
+                    <p id="textoModificable">Este texto cambiará al hacer clic en el botón.</p>
+                    <button onclick="modificarTexto()" class="btn btn-primary">Modificar Texto</button>
+
+                    <script>
+                    function modificarTexto() {
+                        let elemento = document.getElementById('textoModificable');
+                        elemento.innerHTML = '¡El texto ha sido modificado!';
+                        elemento.style.color = 'blue';
+                    }
+                    </script>
+                </div>
+
+                <div class="code-example mt-4">
+                    <h4>Crear y Eliminar Elementos:</h4>
+                    <pre><code class="language-javascript">
+// Crear elemento
+let nuevoParrafo = document.createElement('p');
+nuevoParrafo.textContent = 'Nuevo párrafo';
+
+// Añadir elemento al DOM
+document.body.appendChild(nuevoParrafo);
+
+// Eliminar elemento
+elemento.remove();
+                    </code></pre>
+                </div>
+
+                <div class="exercise-card mt-4">
+                    <div class="card-header">
+                        <h4>Ejercicio - Lista Dinámica</h4>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" id="nuevoItem" class="form-control mb-2" placeholder="Nuevo item">
+                        <button onclick="agregarItem()" class="btn btn-success">Agregar Item</button>
+                        <ul id="listaItems" class="list-group mt-3">
+                        </ul>
+
+                        <script>
+                        function agregarItem() {
+                            let texto = document.getElementById('nuevoItem').value;
+                            if (texto.trim() !== '') {
+                                let lista = document.getElementById('listaItems');
+                                let nuevoLi = document.createElement('li');
+                                nuevoLi.className = 'list-group-item';
+                                nuevoLi.innerHTML = texto + 
+                                    '<button class="btn btn-danger btn-sm float-right" onclick="this.parentElement.remove()">Eliminar</button>';
+                                lista.appendChild(nuevoLi);
+                                document.getElementById('nuevoItem').value = '';
+                            }
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección JavaScript - Eventos -->
+    <section id="js-eventos" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h2><i class="fas fa-bolt"></i> JavaScript - Eventos</h2>
+            </div>
+            <div class="card-body">
+                <h3>Manejo de Eventos</h3>
+                <p>Los eventos permiten detectar acciones del usuario y ejecutar código en respuesta.</p>
+
+                <div class="code-example">
+                    <h4>Tipos de Eventos Comunes:</h4>
+                    <pre><code class="language-javascript">
+// Evento click
+elemento.onclick = function() {
+    // código a ejecutar
+}
+
+// addEventListener
+elemento.addEventListener('click', function() {
+    // código a ejecutar
+});
+
+// Eventos comunes:
+// click - al hacer clic
+// mouseover - al pasar el mouse por encima
+// mouseout - al salir el mouse del elemento
+// keydown - al presionar una tecla
+// submit - al enviar un formulario
+// change - al cambiar el valor de un input
+                    </code></pre>
+                </div>
+
+                <div class="js-demo mt-4">
+                    <h4>Ejemplo - Eventos del Mouse:</h4>
+                    <div id="cuadroEvento" 
+                         style="width: 200px; height: 200px; background-color: #007bff; margin: 20px auto;"
+                         onmouseover="this.style.backgroundColor='#28a745'"
+                         onmouseout="this.style.backgroundColor='#007bff'">
+                        <p class="text-white text-center pt-5">Pasa el mouse por aquí</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card mt-4">
+                    <div class="card-header">
+                        <h4>Ejercicio - Formulario con Validación</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="formularioValidacion" onsubmit="return validarFormulario(event)">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input type="text" id="nombre" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña:</label>
+                                <input type="password" id="password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+
+                        <script>
+                        function validarFormulario(event) {
+                            event.preventDefault();
+                            let nombre = document.getElementById('nombre').value;
+                            let email = document.getElementById('email').value;
+                            let password = document.getElementById('password').value;
+
+                            if (password.length < 6) {
+                                alert('La contraseña debe tener al menos 6 caracteres');
+                                return false;
+                            }
+
+                            alert('Formulario validado correctamente!\nNombre: ' + nombre + '\nEmail: ' + email);
+                            return true;
+                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sección de Proyectos Prácticos -->
+    <section id="proyectos" class="mb-5">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h2><i class="fas fa-project-diagram"></i> Proyectos Prácticos</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Proyecto 1: Calculadora -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Calculadora Simple</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="calculadora">
+                                    <input type="text" id="display" class="form-control mb-2" readonly>
+                                    <div class="row">
+                                        <div class="col-3"><button onclick="agregarNumero('7')" class="btn btn-secondary w-100">7</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('8')" class="btn btn-secondary w-100">8</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('9')" class="btn btn-secondary w-100">9</button></div>
+                                        <div class="col-3"><button onclick="agregarOperador('/')" class="btn btn-warning w-100">/</button></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-3"><button onclick="agregarNumero('4')" class="btn btn-secondary w-100">4</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('5')" class="btn btn-secondary w-100">5</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('6')" class="btn btn-secondary w-100">6</button></div>
+                                        <div class="col-3"><button onclick="agregarOperador('*')" class="btn btn-warning w-100">*</button></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-3"><button onclick="agregarNumero('1')" class="btn btn-secondary w-100">1</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('2')" class="btn btn-secondary w-100">2</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('3')" class="btn btn-secondary w-100">3</button></div>
+                                        <div class="col-3"><button onclick="agregarOperador('-')" class="btn btn-warning w-100">-</button></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-3"><button onclick="agregarNumero('0')" class="btn btn-secondary w-100">0</button></div>
+                                        <div class="col-3"><button onclick="agregarNumero('.')" class="btn btn-secondary w-100">.</button></div>
+                                        <div class="col-3"><button onclick="calcular()" class="btn btn-primary w-100">=</button></div>
+                                        <div class="col-3"><button onclick="agregarOperador('+')" class="btn btn-warning w-100">+</button></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12"><button onclick="limpiar()" class="btn btn-danger w-100">C</button></div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                let display = document.getElementById('display');
+                                
+                                function agregarNumero(num) {
+                                    display.value += num;
+                                }
+
+                                function agregarOperador(op) {
+                                    display.value += op;
+                                }
+
+                                function calcular() {
+                                    try {
+                                        display.value = eval(display.value);
+                                    } catch(error) {
+                                        display.value = 'Error';
+                                    }
+                                }
+
+                                function limpiar() {
+                                    display.value = '';
+                                }
+                                </script>
+                            </div>
+                            <div class="card-footer">
+                                <p>Código de la calculadora:</p>
+                                <pre><code class="language-javascript">
+// HTML necesario:
+// &lt;input type="text" id="display" readonly&gt;
+// Botones numerados del 0-9 y operadores
+
+let display = document.getElementById('display');
+
+function agregarNumero(num) {
+    display.value += num;
+}
+
+function agregarOperador(op) {
+    display.value += op;
+}
+
+function calcular() {
+    try {
+        display.value = eval(display.value);
+    } catch(error) {
+        display.value = 'Error';
+    }
+}
+
+function limpiar() {
+    display.value = '';
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 2: Lista de Tareas -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Lista de Tareas (Todo List)</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="todo-app">
+                                    <div class="input-group mb-3">
+                                        <input type="text" id="tareaInput" class="form-control" placeholder="Nueva tarea">
+                                        <div class="input-group-append">
+                                            <button onclick="agregarTarea()" class="btn btn-primary">Agregar</button>
+                                        </div>
+                                    </div>
+                                    <ul id="listaTareas" class="list-group">
+                                    </ul>
+                                </div>
+
+                                <script>
+                                function agregarTarea() {
+                                    let input = document.getElementById('tareaInput');
+                                    let lista = document.getElementById('listaTareas');
+                                    
+                                    if (input.value.trim() !== '') {
+                                        let li = document.createElement('li');
+                                        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                                        
+                                        let texto = document.createElement('span');
+                                        texto.textContent = input.value;
+                                        
+                                        let btnEliminar = document.createElement('button');
+                                        btnEliminar.className = 'btn btn-danger btn-sm';
+                                        btnEliminar.textContent = 'Eliminar';
+                                        btnEliminar.onclick = function() {
+                                            li.remove();
+                                        };
+                                        
+                                        li.appendChild(texto);
+                                        li.appendChild(btnEliminar);
+                                        lista.appendChild(li);
+                                        
+                                        input.value = '';
+                                    }
+                                }
+                                </script>
+                            </div>
+                            <div class="card-footer">
+                                <p>Código de la Lista de Tareas:</p>
+                                <pre><code class="language-javascript">
+function agregarTarea() {
+    let input = document.getElementById('tareaInput');
+    let lista = document.getElementById('listaTareas');
+    
+    if (input.value.trim() !== '') {
+        let li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        
+        let texto = document.createElement('span');
+        texto.textContent = input.value;
+        
+        let btnEliminar = document.createElement('button');
+        btnEliminar.className = 'btn btn-danger btn-sm';
+        btnEliminar.textContent = 'Eliminar';
+        btnEliminar.onclick = function() {
+            li.remove();
+        };
+        
+        li.appendChild(texto);
+        li.appendChild(btnEliminar);
+        lista.appendChild(li);
+        
+        input.value = '';
+    }
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 3: Juego Simple -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Juego: Adivina el Número</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="juego">
+                                    <p>Adivina un número entre 1 y 100:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="number" id="intento" class="form-control" min="1" max="100">
+                                        <div class="input-group-append">
+                                            <button onclick="verificarIntento()" class="btn btn-success">Verificar</button>
+                                        </div>
+                                    </div>
+                                    <p id="mensaje"></p>
+                                    <button onclick="iniciarJuego()" class="btn btn-primary">Nuevo Juego</button>
+                                </div>
+
+                                <script>
+                                let numeroSecreto;
+                                let intentos;
+
+                                function iniciarJuego() {
+                                    numeroSecreto = Math.floor(Math.random() * 100) + 1;
+                                    intentos = 0;
+                                    document.getElementById('mensaje').textContent = 'Juego iniciado!';
+                                    document.getElementById('intento').value = '';
+                                }
+
+                                function verificarIntento() {
+                                    let intento = parseInt(document.getElementById('intento').value);
+                                    intentos++;
+                                    
+                                    let mensaje = document.getElementById('mensaje');
+                                    
+                                    if (intento === numeroSecreto) {
+                                        mensaje.textContent = `¡Correcto! Lo lograste en ${intentos} intentos.`;
+                                        mensaje.style.color = 'green';
+                                    } else if (intento < numeroSecreto) {
+                                        mensaje.textContent = 'El número es mayor.';
+                                        mensaje.style.color = 'red';
+                                    } else {
+                                        mensaje.textContent = 'El número es menor.';
+                                        mensaje.style.color = 'red';
+                                    }
+                                }
+
+                                // Iniciar el juego al cargar
+                                iniciarJuego();
+                                </script>
+                            </div>
+                            <div class="card-footer">
+                                <p>Código del Juego:</p>
+                                <pre><code class="language-javascript">
+let numeroSecreto;
+let intentos;
+
+function iniciarJuego() {
+    numeroSecreto = Math.floor(Math.random() * 100) + 1;
+    intentos = 0;
+    document.getElementById('mensaje').textContent = 'Juego iniciado!';
+    document.getElementById('intento').value = '';
+}
+
+function verificarIntento() {
+    let intento = parseInt(document.getElementById('intento').value);
+    intentos++;
+    
+    let mensaje = document.getElementById('mensaje');
+    
+    if (intento === numeroSecreto) {
+        mensaje.textContent = `¡Correcto! Lo lograste en ${intentos} intentos.`;
+        mensaje.style.color = 'green';
+    } else if (intento < numeroSecreto) {
+        mensaje.textContent = 'El número es mayor.';
+        mensaje.style.color = 'red';
+    } else {
+        mensaje.textContent = 'El número es menor.';
+        mensaje.style.color = 'red';
+    }
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts necesarios -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <!-- Prism JS para resaltado de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+
+</body>
+</html>
